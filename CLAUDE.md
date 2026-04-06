@@ -39,8 +39,8 @@ Research complete. Next: backtesting framework setup, data pipeline, first strat
 
 ## Research Documents
 
-- `research-etf-momentum.md` — Academic evidence, cost/tax engineering, implementation blueprint for dual momentum
-- `research-etf-backtesting.md` — Framework comparison, lookback sensitivity, historical performance, failure modes
-- `research-crypto-satellite.md` — Exchange selection, fee analysis, strategy candidates, risk management for crypto
+- `research/research-etf-momentum.md` — Academic evidence, cost/tax engineering, implementation blueprint for dual momentum
+- `research/research-etf-backtesting.md` — Framework comparison, lookback sensitivity, historical performance, failure modes
+- `research/research-crypto-satellite.md` — Exchange selection, fee analysis, strategy candidates, risk management for crypto
   sleeve
-- `research-gaps-and-alternatives.md` — Alternative brokers, yfinance data quality, MiCA regulation, fractional shares
+- `research/research-gaps-and-alternatives.md` — Alternative brokers, yfinance data quality, MiCA regulation, fractional shares
