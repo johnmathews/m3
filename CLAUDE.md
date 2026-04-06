@@ -48,3 +48,7 @@ Research complete. Next: backtesting framework setup, data pipeline, first strat
 - `research/research-llm-alpha-generation.md` — LLM-driven alpha generation: sentiment analysis, fundamental analysis, agent
   frameworks, alternative data, regime detection, risks (data contamination, hallucination), practical tools (FinGPT, FinRL,
   MCP-based trading APIs). Key finding: LLMs best used as research assistants, not autonomous traders.
+- `research/research-llm-crypto-alpha.md` — Web-researched (2025-2026 sources): LLM/AI for crypto trading alpha. Covers
+  sentiment analysis backtests, on-chain + LLM analysis, narrative tracking, tokenomics, automated agents, live trading
+  results (Alpha Arena), and specific tools (Kaito, Arkham, AIXBT, Nansen). Key finding: 20-year backtest shows LLMs
+  produce statistically insignificant alpha; 4/6 frontier LLMs lost money in live trading competition.
