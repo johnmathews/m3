@@ -44,3 +44,7 @@ Research complete. Next: backtesting framework setup, data pipeline, first strat
 - `research/research-crypto-satellite.md` — Exchange selection, fee analysis, strategy candidates, risk management for crypto
   sleeve
 - `research/research-gaps-and-alternatives.md` — Alternative brokers, yfinance data quality, MiCA regulation, fractional shares
+- `research/research-ai-agents-trading.md` — AI agent frameworks, scheduled LLM workflows, cost analysis, evidence for/against autonomous trading
+- `research/research-llm-alpha-generation.md` — LLM-driven alpha generation: sentiment analysis, fundamental analysis, agent
+  frameworks, alternative data, regime detection, risks (data contamination, hallucination), practical tools (FinGPT, FinRL,
+  MCP-based trading APIs). Key finding: LLMs best used as research assistants, not autonomous traders.
