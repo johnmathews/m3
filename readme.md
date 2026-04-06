@@ -47,14 +47,14 @@ Professional quants have speed, data, and capital advantages. Retail edges tend 
 
 ### Realistic return expectations
 
-| Strategy type           | Annual return (after costs) | Notes                            |
-| ----------------------- | --------------------------- | -------------------------------- |
-| ETF momentum/rotation   | 10–20%                      | Well-documented, low maintenance |
-| Stock factor strategies | 10–25%                      | Requires more data and research  |
-| Crypto systematic       | 20–50%+                     | Higher risk, higher variance     |
-| Combined portfolio      | 15–25%                      | Diversification benefit          |
+| Strategy type           | Annual return (after costs) | Notes                                                                 |
+| ----------------------- | --------------------------- | --------------------------------------------------------------------- |
+| ETF momentum/rotation   | 5–9%                        | Post-publication decay reduces historical 15%+ to more modest returns |
+| Stock factor strategies | 10–25%                      | Requires more data and research                                       |
+| Crypto systematic       | 20–50%+                     | Higher risk, higher variance                                          |
+| Combined portfolio      | 10–18%                      | Correlation benefit is regime-dependent (see research docs)           |
 
-On €2,000 this translates to €200–500/year in the early phase. The real value is in building the system and skills.
+On €2,000 this translates to €100–360/year in the early phase. The real value is in building the system and skills.
 
 ## Choices Discussed
 
@@ -79,7 +79,8 @@ On €2,000 this translates to €200–500/year in the early phase. The real va
 
 Rationale:
 
-- The two are largely uncorrelated — diversification benefit
+- The two have historically had low correlation, though BTC-equity correlation is regime-dependent (reached +0.88 in early
+  2025, then flipped to -0.30 during tariff stress). Diversification benefit is not guaranteed during drawdowns.
 - Different timeframes keep complexity manageable
 - If the crypto strategy fails, only 30% of a small account is affected
 - Same infrastructure serves both — one backtesting engine, one dashboard, one journal
@@ -102,10 +103,10 @@ means:
 
 | Source                   | Asset class         | Cost                    | Quality                      |
 | ------------------------ | ------------------- | ----------------------- | ---------------------------- |
-| Yahoo Finance (yfinance) | Stocks, ETFs        | Free                    | Good for daily/weekly        |
+| Yahoo Finance (yfinance) | Stocks, ETFs        | Free                    | Good for daily/weekly; known data quality issues (see backtesting research) |
 | Alpha Vantage            | Stocks, ETFs, Forex | Free tier (25 req/day)  | Decent                       |
 | CoinGecko                | Crypto              | Free tier               | Good for daily               |
-| Binance API              | Crypto              | Free                    | Excellent for all timeframes |
+| Bitvavo API              | Crypto              | Free (with account)     | Good for all timeframes (NL-accessible) |
 | DEGIRO/IBKR API          | Stocks, ETFs        | Broker account required | Real-time with account       |
 
 Paid sources to consider later: Polygon.io, Tiingo, Quandl/Nasdaq Data Link.
@@ -116,16 +117,18 @@ Paid sources to consider later: Polygon.io, Tiingo, Quandl/Nasdaq Data Link.
 
 Leading candidates:
 
-- **DEGIRO** — low fees, NL-based, good ETF selection (some commission-free), limited API
+- **DEGIRO** — €1/trade on Core Selection (Tradegate), NL-based, ~1,500 Core ETFs, no fractional shares
+- **Trade Republic** — €1/trade or free via savings plan, fractional shares from €1, 2% cash interest, BaFin-regulated
 - **Interactive Brokers** — professional-grade API, low fees at scale, more complex
-- **Binance/Kraken** — for crypto, good APIs, low fees
+- **Bitvavo/Kraken** — for crypto; Bitvavo (0.15%/0.25%) preferred over Kraken (0.25%/0.40%) at small scale
 
 ### 6. Tech stack
 
 **Decision: Python-based, self-hosted**
 
 - **Language:** Python (dominant in quant finance, best library ecosystem)
-- **Backtesting:** Backtrader, Zipline, or VectorBT (to be evaluated)
+- **Backtesting:** vectorbt (parameter sweeps), bt (simple monthly logic), NautilusTrader (execution validation),
+  Freqtrade (crypto satellite)
 - **Data:** pandas, numpy
 - **Dashboards:** Streamlit or Grafana
 - **Storage:** SQLite or PostgreSQL for trade logs, parquet files for market data

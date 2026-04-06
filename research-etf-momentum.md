@@ -10,9 +10,10 @@ lack of edge, but the friction of trading costs, bid-ask spreads, and sudden mar
 
 For a €2,000 account, traditional cross-sectional momentum (buying the top decile of a large universe) is unviable due to
 high turnover and commission drag. Instead, the optimal approach is a **Dual Momentum** strategy utilizing a highly
-concentrated universe of commission-free UCITS ETFs (via DEGIRO's Core Selection). By combining a 12-month relative
-momentum ranking with a 10-month Simple Moving Average (SMA) absolute momentum filter, investors can capture the momentum
-premium while drastically reducing drawdowns and keeping trading costs near zero. Furthermore, with the 2026 Dutch Box 3
+concentrated universe of low-cost UCITS ETFs (via DEGIRO's Core Selection on Tradegate, €1/trade). By combining a
+12-month relative momentum ranking with a 10-month Simple Moving Average (SMA) absolute momentum filter, investors can
+capture the momentum premium while drastically reducing drawdowns and keeping trading costs minimal (~€24/year for monthly
+rotation). Furthermore, with the 2026 Dutch Box 3
 tax-free allowance set at €59,357, tax drag is a non-issue for this account size, allowing total focus on gross return
 optimization and cost reduction.
 
@@ -87,14 +88,23 @@ With only €2,000, transaction costs can easily destroy the momentum edge.
 
 ### Broker Fee Reality (DEGIRO vs. IBKR)
 
-| Broker                      | Fee Structure for Euronext ETFs                     | Impact on Monthly Rotation (1 Buy, 1 Sell) |
-| :-------------------------- | :-------------------------------------------------- | :----------------------------------------- |
-| **DEGIRO (Core Selection)** | €0.00 per trade (under fair use conditions) [9]     | €0.00 / year                               |
-| **DEGIRO (Non-Core)**       | €2.00 per trade + handling fees [9]                 | ~€48.00 / year (2.4% drag on €2k)          |
-| **Interactive Brokers**     | Tiered: 0.05% (min €1.25) + €0.75 exchange fee [10] | ~€48.00 / year (2.4% drag on €2k)          |
+| Broker                      | Fee Structure                                                    | Impact on Monthly Rotation (1 Buy, 1 Sell) |
+| :-------------------------- | :--------------------------------------------------------------- | :----------------------------------------- |
+| **DEGIRO (Core Selection)** | €1.00 handling fee per trade, Tradegate only [9]                  | ~€24.00 / year (1.2% drag on €2k)          |
+| **DEGIRO (Non-Core)**       | €2.00 commission + €1.00 handling = €3.00 per trade [9]          | ~€72.00 / year (3.6% drag on €2k)          |
+| **Interactive Brokers**     | Tiered: 0.05% (min €1.25) + exchange fees [10]                   | ~€48.00 / year (2.4% drag on €2k)          |
+| **Trade Republic**          | €1.00 per manual trade; free via savings plan [14]               | €0–24 / year depending on automation       |
 
-_Takeaway: A €2,000 account MUST restrict its universe to DEGIRO's ETF Kernselectie (Core Selection) to survive. Paying
-€48/year in commissions creates an insurmountable 2.4% performance drag._
+_Note: DEGIRO overhauled Core Selection on October 1, 2025 — expanded to ~1,500 ETFs on Tradegate, eliminated the Fair
+Use Policy, and set a flat €1 handling fee per trade. The old "€0 under fair use" terms no longer apply._
+
+_Note: Trade Republic offers fractional shares from €1 and free automated ETF savings plans. At €2k, DEGIRO's lack of
+fractional shares creates significant cash drag (CSPX trades at ~€575/share, leaving up to 17% uninvested earning 0%).
+Trade Republic also pays ~2% interest on uninvested cash. Consider Trade Republic as primary or complementary broker._
+
+_Takeaway: A €2,000 account MUST use a low-cost broker. DEGIRO Core Selection (€1/trade on Tradegate) or Trade Republic
+(€1/trade or free via savings plan) are the viable options. Paying €72/year on non-Core ETFs creates an insurmountable
+3.6% performance drag._
 
 ### Dutch Box 3 Tax Implications (2026)
 
@@ -106,24 +116,32 @@ standard UCITS efficiency.
 
 ## Risk Playbook
 
-Even with zero commissions, momentum strategies face structural risks.
+Even with minimal commissions, momentum strategies face structural risks.
 
 - **Momentum Crashes:** As noted by Daniel and Moskowitz, momentum strategies can crash violently when bear markets
   suddenly reverse [4]. An absolute momentum filter (moving to cash/bonds when the 10-month SMA is breached) is mandatory
   to avoid holding toxic assets into a crash.
+- **Bond-Equity Correlation Regime Change:** Since 2020, stock-bond correlation has shifted from negative to positive,
+  driven by inflation dynamics. This is not a one-off (as in 2022) but a structural regime change. When the absolute
+  momentum filter moves to AGGH during equity declines, bonds may fall simultaneously — breaking the core hedge mechanism
+  of dual momentum. Consider whether a money market fund or cash position is a better "safe harbor" than bonds in the
+  current regime.
 - **Whipsaw in Sideways Markets:** Trend-following systems suffer "whipsaw" losses in oscillating markets. To mitigate
   this, use longer lookbacks (10-12 months) rather than short-term (1-3 months) signals, which trigger too frequently.
-- **Implicit Costs (Spreads):** Even zero-commission ETFs have bid-ask spreads. Trading highly liquid ETFs during optimal
+- **Implicit Costs (Spreads):** Even low-commission ETFs have bid-ask spreads. Trading highly liquid ETFs during optimal
   hours is critical.
 
-## Implementation Blueprint: Zero-Fee Dual Momentum Portfolio (DEGIRO Core Selection)
+## Implementation Blueprint: Low-Cost Dual Momentum Portfolio (DEGIRO Core Selection)
 
-This blueprint is designed specifically for a €2,000 account on DEGIRO.
+This blueprint is designed specifically for a €2,000 account on DEGIRO, using Tradegate tickers for Core Selection
+pricing (€1/trade). The same ISINs trade on LSE and Euronext under different tickers — using the wrong exchange means
+paying €3+/trade plus potential currency conversion fees.
 
-1. **Universe Selection:** Select 3-4 highly liquid ETFs from DEGIRO's Core Selection [12].
-   - _US Equities:_ iShares Core S&P 500 UCITS ETF (CSPX)
-   - _Global Equities:_ iShares Core MSCI World UCITS ETF (SWDA/EUNL)
-   - _Safe Haven/Bonds:_ iShares Core Global Aggregate Bond UCITS ETF (AGGH)
+1. **Universe Selection:** Select 3-4 highly liquid ETFs from DEGIRO's Core Selection on Tradegate [12].
+   - _US Equities:_ iShares Core S&P 500 UCITS ETF — **SXR8** on Tradegate (ISIN: IE00B5BMR087; LSE ticker: CSPX)
+   - _Global Equities:_ iShares Core MSCI World UCITS ETF — **EUNL** on Tradegate (ISIN: IE00B4L5Y983; LSE ticker: SWDA)
+   - _Safe Haven/Bonds:_ iShares Core Global Aggregate Bond UCITS ETF — **EUNA** on Tradegate (ISIN: IE00BDBRDM35; LSE
+     ticker: AGGH)
 2. **Signal Generation (Monthly):** On the last trading day of the month, calculate the 12-month total return for the
    equity ETFs.
 3. **Absolute Filter:** Check if the 12-month return of the best-performing equity ETF is greater than the return of a
@@ -138,14 +156,21 @@ Execution timing matters. An evaluation of Xetra showed that implicit transactio
 
 - **Order Types:** Always use limit orders to control execution price and avoid market-maker exploitation during volatile
   periods.
-- **Time of Day:** Trade when the underlying markets of the ETF are open. For US-focused ETFs (like CSPX), trade between
+- **Time of Day:** Trade when the underlying markets of the ETF are open. For US-focused ETFs (like SXR8), trade between
   15:30 CET and 17:30 CET when both European and US markets are active, ensuring the tightest bid-ask spreads.
+- **Exchange:** Always use Tradegate for Core Selection pricing. Verify the ticker before placing orders — buying "CSPX"
+  routes to LSE (€3+ per trade + GBP conversion), while "SXR8" routes to Tradegate (€1/trade, EUR-denominated).
 
 ## Tools
 
-For a retail investor, complex software is unnecessary. Free tools like Yahoo Finance (for adjusted closing prices)
-combined with a simple Excel spreadsheet or a basic Python script (using `pandas` and `yfinance`) are sufficient to
-calculate 12-month returns and 10-month SMAs once a month.
+For a retail investor, complex software is unnecessary. Free tools like Yahoo Finance combined with a simple Excel
+spreadsheet or a basic Python script (using `pandas` and `yfinance`) are sufficient to calculate 12-month returns and
+10-month SMAs once a month.
+
+**yfinance data quality caveats:** As of 2025, yfinance has known issues: `auto_adjust=True` is now the default (the
+separate `Adj Close` column was removed), dividend data can be corrupted (Yahoo sums dividends + capital gain
+distributions), and European tickers sometimes have gaps. Always use `repair=True`, cross-validate against justETF
+factsheets or iShares provider data, and pin your yfinance version.
 
 ## Key Practitioners and Resources
 
@@ -180,3 +205,4 @@ calculate 12-month returns and 10-month SMAs once a month.
 12. DEGIRO — [ETF Kernselectie](https://www.degiro.nl/tarieven/etf-kernselectie)
 13. Deutsche Börse —
     [Xetra: Europe's Largest Trading Venue for ETFs](https://deutsche-boerse.com/resource/blob/252862/79c101abf9d17f5935767142f96c068d/brochure-xetra-europes-largest-trading-platform-for-etfs-data.pdf)
+14. Trade Republic — [Kosten](https://traderepublic.com/nl-nl/kosten)

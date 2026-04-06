@@ -22,11 +22,12 @@ requirements.
 | **Mean Reversion** (daily BTC/ETH dips)        | €300+ per trade     | Mixed (some backtests show 1.95 Profit Factor, others marginal) | Moderate (maker-only preferred)   | Low-Medium | Daily checks    | Conditional yes (tight stops, maker only) |
 | **Trend Following** (weekly MA/Momentum)       | €600 (one position) | Historically reduces drawdowns vs buy-and-hold                  | Low                               | Low        | Weekly          | **Yes** (core of satellite)               |
 | **Funding-Rate Arbitrage** (spot + short perp) | €1,000–€2,000+      | 15-25% annualized normally, brief spikes >100%                  | Low fee sensitivity, needs margin | High       | Daily           | No (requires margin/derivatives access)   |
-| **DeFi Yields** (staking/liquidity)            | €500+               | stETH ~2.5% APR, stablecoins 0.5-3%                             | High friction on L1               | Moderate   | Low-Medium      | Conditional no (unless on L2)             |
+| **DeFi Yields** (staking/liquidity)            | €500+               | stETH ~3.2% APY (incl. MEV), stablecoins 0.5-3%                 | High friction on L1               | Moderate   | Low-Medium      | Conditional no (unless on L2)             |
 | **Grid Trading** (range-bound)                 | €400–€600           | Edges if grid step >2x maker fee                                | High (taker), Low (maker)         | Medium     | Medium          | Conditional yes (maker-only, BTC/ETH)     |
 
-**Recommendation:** Combine a weekly trend core with a small mean reversion sleeve. Allocate 70–80% to weekly
-trend-following on BTC/ETH, and 20–30% to daily mean reversion or maker-only micro-grids.
+**Recommendation:** Focus on weekly trend-following as the core strategy. Evidence for mean reversion on BTC is weak (see
+below), so allocate 90-100% to trend-following on BTC/ETH, with at most a small experimental allocation to maker-only
+micro-grids if desired for learning purposes.
 
 ## Which cryptocurrencies to trade
 
@@ -36,13 +37,15 @@ trading outside of BTC and ETH introduces significant slippage risk.
 
 ## Exchange selection for a Dutch/EU resident
 
-Binance withdrew from the Dutch market in 2023 after failing to secure DNB registration.
+Binance withdrew from the Dutch market in 2023 after failing to secure DNB registration. As of April 2026, Binance has
+not returned and there are no announced plans to do so. Since July 1, 2025, all exchanges serving Dutch residents must
+hold a MiCA license from the AFM (or passported from another EU authority).
 
-| Exchange          | NL/EU Regulatory Status | Base Spot Fees (Maker/Taker) | API Limits          | EUR SEPA Deposit/Withdrawal | Security & Notes                         |
-| :---------------- | :---------------------- | :--------------------------- | :------------------ | :-------------------------- | :--------------------------------------- |
-| **Bitvavo**       | DNB-registered          | 0.15% / 0.25%                | ~1,000 weight/min   | Free / Free                 | Local EUR rails, solid retail UX         |
-| **Kraken**        | EU-compliant            | 0.16% / 0.26%                | Call-counter system | Free / 1-2 EUR              | 14-year track record without major hacks |
-| **Coinbase Adv.** | DNB-registered          | 0.40% / 0.60%                | ~10 requests/sec    | Free / ~€0.15               | Fined by DNB in 2023; 2021 data breach   |
+| Exchange          | NL/EU Regulatory Status                          | Base Spot Fees (Maker/Taker) | API Limits          | EUR SEPA Deposit/Withdrawal | Security & Notes                         |
+| :---------------- | :----------------------------------------------- | :--------------------------- | :------------------ | :-------------------------- | :--------------------------------------- |
+| **Bitvavo**       | DNB-registered; MiCA-licensed via AFM (June 2025) | 0.15% / 0.25%                | ~1,000 weight/min   | Free / Free                 | Local EUR rails, solid retail UX         |
+| **Kraken**        | MiCA-licensed via CBI Ireland (Aug 2025)          | 0.25% / 0.40%                | Call-counter system | Free / €1                   | 14-year track record without major hacks |
+| **Coinbase Adv.** | DNB-registered; MiCA-licensed                     | 0.60% / 1.20%               | ~10 requests/sec    | Free / ~€0.15               | Fined €3.3M by DNB in 2023              |
 
 **Recommendation:** Bitvavo primary, Kraken secondary for counterparty diversification.
 
@@ -51,11 +54,12 @@ Binance withdrew from the Dutch market in 2023 after failing to secure DNB regis
 | Venue             | Base Maker/Taker | Round-Trip Maker | Round-Trip Taker | Weekly Trading Annual Fee Drag (Taker) |
 | :---------------- | :--------------- | :--------------- | :--------------- | :------------------------------------- |
 | **Bitvavo**       | 0.15% / 0.25%    | 0.30%            | 0.50%            | ~26.0% (52 trades)                     |
-| **Kraken**        | 0.16% / 0.26%    | 0.32%            | 0.52%            | ~27.0% (52 trades)                     |
-| **Coinbase Adv.** | 0.40% / 0.60%    | 0.80%            | 1.20%            | ~62.4% (52 trades)                     |
+| **Kraken**        | 0.25% / 0.40%    | 0.50%            | 0.80%            | ~41.6% (52 trades)                     |
+| **Coinbase Adv.** | 0.60% / 1.20%    | 1.20%            | 2.40%            | ~124.8% (52 trades)                    |
 
-**Key insight:** Trading daily with taker fees requires >0.5% alpha per day to break even — implausible for retail.
-Weekly cadence with maker orders is the minimum viable approach.
+**Key insight:** The Bitvavo advantage over Kraken is much larger than it appears — 26% vs 41.6% annual drag for weekly
+taker trades. Coinbase is completely unviable at this scale. Trading daily with taker fees requires >0.5% alpha per day
+to break even — implausible for retail. Weekly cadence with maker orders on Bitvavo is the minimum viable approach.
 
 ## Historical performance evidence
 
@@ -63,19 +67,25 @@ Weekly cadence with maker orders is the minimum viable approach.
 
 - Academic studies confirm intraday and monthly time-series momentum in Bitcoin
 - Simple moving average filters (200-day MA) have historically reduced drawdowns
-- Mean reversion (RSI < 30) shows mixed results across backtests
+- Mean reversion (RSI < 30) shows poor results on Bitcoin — QuantifiedStrategies found it "basically worthless," with the
+  best setup producing only 3 trades over 6 years. The evidence does not support a significant allocation to mean
+  reversion strategies on crypto.
 
 ### Correlation with traditional markets
 
-- Since 2020, BTC-S&P500 correlation has increased
-- During stress, crypto often moves in sync with equities
-- Periods of decoupling do occur but aren't guaranteed
+- Since 2020, BTC-S&P500 correlation has generally increased, reaching +0.88 in early 2025
+- However, correlation is highly regime-dependent — it crashed to -0.30 during late 2025 tariff-driven market stress
+- During stress, crypto often moves in sync with equities — precisely when diversification is most needed
+- The readme's claim that ETF and crypto sleeves are "largely uncorrelated" should be treated skeptically; during the
+  periods that matter most (drawdowns), correlation tends to spike
 
 ## Risk management
 
 - **Position Sizing:** Fixed fractional (1% account risk per trade)
 - **Stops:** Soft stops or stop-limit orders (avoid market stops during flash crashes)
-- **Counterparty Risk:** Split across Bitvavo and Kraken
+- **Counterparty Risk:** Split across Bitvavo and Kraken. The Bybit hack (February 2025, $1.4B stolen — the largest
+  exchange hack in history) is a concrete reminder that even major exchanges can be compromised. Both Bitvavo and Kraken
+  now hold MiCA licenses, which provides some regulatory oversight but does not eliminate exchange risk.
 - **Max Drawdown:** Expect 50%+ drawdowns in BTC; size accordingly
 
 ## Dutch tax implications (Box 3)
@@ -83,7 +93,9 @@ Weekly cadence with maker orders is the minimum viable approach.
 - Crypto treated as Box 3 assets (vermogensbelasting)
 - Tax on Jan 1 snapshot value; forfaitair rendement 6.00% for 2026
 - €59,357 tax-free allowance means €600 account is exempt
-- Active systematic trading by retail generally stays in Box 3 (not Box 1)
+- Low-frequency rebalancing (weekly/monthly) at this scale generally stays in Box 3. However, Dutch court precedent has
+  ruled that systematic structured trading with predictable profits (especially via bots with high trade volumes) can be
+  reclassified as Box 1 income. At €600 this is unlikely, but worth monitoring if the project scales.
 - From Jan 2026, crypto service providers report client data to Belastingdienst
 - Maintain accurate year-end records
 
@@ -108,9 +120,14 @@ Paper trade for 4-8 weeks before committing real capital.
 
 ## Concrete portfolio blueprint
 
-1. **Core Trend Sleeve (70-80%):** Weekly moving average filter on BTC/ETH. Rebalance weekly/monthly using maker orders.
-2. **Mean Reversion Sleeve (20-30%):** Daily MR buys on BTC/ETH dips with strict stop-losses.
-3. **Execution:** Bitvavo + Kraken.
+1. **Trend-Following Core (90-100%):** Weekly moving average filter on BTC/ETH. Rebalance weekly/monthly using maker
+   orders on Bitvavo. Zarattini et al. (2025) found an ensemble trend model on BTC achieved a 1.58 Sharpe and 30% CAGR
+   with only 19% max drawdown — though shorter lookbacks (5-30 day) outperformed weekly. The weekly cadence is a
+   fee-driven compromise.
+2. **Experimental Sleeve (0-10%):** Small allocation to maker-only micro-grids for learning. Mean reversion (RSI-based)
+   is not well-supported by evidence on BTC.
+3. **Execution:** Bitvavo primary (lowest fees), Kraken secondary (counterparty diversification, but fees are
+   significantly higher at base tier).
 
 ## What to avoid at €600
 
