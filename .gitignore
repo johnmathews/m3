@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Data files (large, downloaded/generated)
+data/
+*.parquet
+*.csv
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Environment and secrets
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+secrets.yaml
+vault_password
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Coverage and testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# uv
+.python-version
